@@ -1,5 +1,6 @@
 import { argv } from 'node:process'
 import { crawlPage } from './crawl.js'
+import { printReport } from './report.js'
 
 async function main() {
     const cmdArgs = argv.slice(2,)
@@ -10,9 +11,9 @@ async function main() {
     } else if (cmdArgs.length === 1) {
         console.log(`start crawling ${cmdArgs[0]} ...`)
     }
-    const base_url = 'https://wagslane.dev'
-    await crawlPage(base_url)
-
+    const base_url = cmdArgs[0]
+    const pages = await crawlPage(base_url)
+    printReport(pages)
 } 
 
 main()
